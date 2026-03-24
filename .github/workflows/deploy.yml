@@ -2,7 +2,7 @@ name: Deploy to COS
 
 on:
   push:
-    branches: [main, master]  # 当推送到 main 或 master 分支时触发
+    branches: [main, master]
 
 jobs:
   build-and-deploy:
@@ -16,34 +16,31 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
+      
       - name: Install dependencies
         run: |
-          npm install -g pnpm
-          # 或者如果你使用 pnpm/yarn
-          rm -rf node_modules
-          pnpm install
-          
+          rm -rf node_modules pnpm-lock.yaml
+          pnpm install --no-frozen-lockfile
+      
       - name: Build project
         run: pnpm run build
-        
+      
       - name: Install COS CLI
         run: |
           wget https://github.com/tencentyun/coscli/releases/latest/download/coscli-linux
           chmod +x coscli-linux
           sudo mv coscli-linux /usr/local/bin/coscli
-          
+      
       - name: Configure COS CLI
         run: |
           coscli config set \
             -s ${{ secrets.COS_SECRET_ID }} \
             -k ${{ secrets.COS_SECRET_KEY }} \
             -r ap-guangzhou
-          
+      
       - name: Sync to COS
         run: |
           coscli sync ./dist/ cos://frontend-static-xxx/ -r
-          
-      - name: Set public read permission
-        run: |
-          coscli set-acl cos://frontend-static-xxx/ -r --acl public-read
