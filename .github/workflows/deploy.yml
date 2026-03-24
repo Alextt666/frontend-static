@@ -26,9 +26,9 @@ jobs:
       
       - name: Install COS CLI
         run: |
-          wget https://github.com/tencentyun/coscli/releases/latest/download/coscli-linux
-          chmod +x coscli-linux
-          sudo mv coscli-linux /usr/local/bin/coscli
+          wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-386
+          chmod +x coscli-linux-386
+          sudo mv coscli-linux-386 /usr/local/bin/coscli
       
       - name: Configure COS CLI
         run: |
