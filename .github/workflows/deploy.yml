@@ -42,4 +42,4 @@ jobs:
             -r ${{ secrets.COS_REGION }} \
       - name: Sync to COS
         run: |
-          coscli sync ./dist/ cos://frontend-static-xxx/ -r
+          coscli sync ./dist/ cos://frontend-static-1303756320/ -r
