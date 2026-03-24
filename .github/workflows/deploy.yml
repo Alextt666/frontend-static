@@ -35,7 +35,7 @@ jobs:
           coscli config set \
             --secret_id ${{ secrets.COS_SECRET_ID }} \
             --secret_key ${{ secrets.COS_SECRET_KEY }} \
-            -r ap-guangzhou
+            --region ap-guangzhou
       
       - name: Sync to COS
         run: |
