@@ -16,46 +16,30 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'npm'
       
-      - name: 安装依赖
-        run: |
-          rm -rf node_modules package-lock.json
-          npm ci --legacy-peer-deps
+      - name: 安装
+        run: npm ci  # 使用clean install保证依赖一致性
+      
       
       - name: 构建项目
         run: npm run build
       
-      - name: 验证构建产物
+      - name: Install COS CLI
         run: |
-          if [ ! -d "dist" ]; then
-            echo "构建失败：dist 目录不存在"
-            exit 1
-          fi
-          echo "构建成功，文件列表："
-          ls -la dist/
+          wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-386
+          chmod +x coscli-linux-386
+          sudo mv coscli-linux-386 /usr/local/bin/coscli
       
-      - name: 安装 COS CLI
-        run: |
-          wget https://github.com/tencentyun/coscli/releases/download/v1.0.0/coscli-linux
-          chmod +x coscli-linux
-          sudo mv coscli-linux /usr/local/bin/coscli
-          coscli --version
-      
-      - name: 配置 COS CLI
+      - name: Configure COS CLI
         run: |
           coscli config set \
             --secret_id ${{ secrets.COS_SECRET_ID }} \
             --secret_key ${{ secrets.COS_SECRET_KEY }} \
-            --bucket ${{ secrets.COS_BUCKET }} \
-            --region ${{ secrets.COS_REGION }}
-      
-      - name: 上传到 COS
+      - name: Configure COS ADD
         run: |
-          # 上传到 static 目录（配合 Nginx 配置）
+          coscli config add \
+            -b ${{ secrets.COS_BUCKET }} \
+            -r ${{ secrets.COS_REGION }} \
+      - name: Sync to COS
+        run: |
           coscli sync ./dist/ cos://${{ secrets.COS_BUCKET }}/static/ -r
-          
-      - name: 设置公有读权限
-        run: |
-          # 设置上传的文件为公有读
-          coscli set-acl cos://${{ secrets.COS_BUCKET }}/static/ -r --acl public-read
