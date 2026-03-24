@@ -10,23 +10,19 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
       
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: 安装
+        run: npm ci  # 使用clean install保证依赖一致性
       
-      - name: Install dependencies
-        run: |
-          rm -rf node_modules pnpm-lock.yaml
-          pnpm install --no-frozen-lockfile
       
-      - name: Build project
-        run: pnpm run build
+      - name: 构建项目
+        run: npm run build
       
       - name: Install COS CLI
         run: |
