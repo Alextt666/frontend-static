@@ -67,14 +67,14 @@ const educations = [
 <style scoped>
 .honor-badge {
   padding: 3px 10px;
-  border: 1px solid rgba(0, 245, 255, 0.35);
+  border: 1px solid rgba(124, 58, 237, 0.35);
   color: var(--cyber-cyan);
-  background: rgba(0, 245, 255, 0.04);
+  background: rgba(124, 58, 237, 0.05);
   transition: background 0.2s ease, box-shadow 0.2s ease;
   cursor: default;
 }
 .honor-badge:hover {
-  background: rgba(0, 245, 255, 0.12);
-  box-shadow: 0 0 10px rgba(0,245,255,0.3);
+  background: rgba(124, 58, 237, 0.12);
+  box-shadow: 0 0 10px rgba(124,58,237,0.25);
 }
 </style>

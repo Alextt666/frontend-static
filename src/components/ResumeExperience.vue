@@ -118,7 +118,7 @@ onMounted(() => {
   background: linear-gradient(to bottom, var(--cyber-cyan), var(--cyber-purple));
   transform: scaleY(0);
   transform-origin: top;
-  box-shadow: 0 0 8px rgba(0,245,255,0.4);
+  box-shadow: 0 0 6px rgba(124,58,237,0.3);
 }
 
 .timeline-line.timeline-grow {
@@ -134,7 +134,7 @@ onMounted(() => {
   height: 10px;
   background: var(--cyber-cyan);
   transform: rotate(45deg);
-  box-shadow: 0 0 8px var(--cyber-cyan), 0 0 16px rgba(0,245,255,0.5);
+  box-shadow: 0 0 8px var(--cyber-cyan), 0 0 16px rgba(124,58,237,0.35);
   animation: neonPulse 2.5s ease-in-out infinite;
 }
 

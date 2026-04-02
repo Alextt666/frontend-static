@@ -111,7 +111,7 @@ onMounted(() => {
 
 <style scoped>
 .project-card {
-  background: rgba(0, 245, 255, 0.02);
+  background: rgba(124, 58, 237, 0.03);
   border: 1px solid var(--border-dim);
   padding: 1.25rem;
   position: relative;
@@ -141,7 +141,7 @@ onMounted(() => {
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--border-bright);
-  box-shadow: 0 8px 30px rgba(0,245,255,0.12), 0 0 0 1px rgba(0,245,255,0.1);
+  box-shadow: 0 8px 30px rgba(124,58,237,0.15), 0 0 0 1px rgba(124,58,237,0.1);
 }
 
 .project-card.project-card-visible {
@@ -159,13 +159,13 @@ onMounted(() => {
 
 .tech-tag {
   padding: 2px 8px;
-  background: rgba(0, 245, 255, 0.05);
-  border: 1px solid rgba(0, 245, 255, 0.2);
+  background: rgba(124, 58, 237, 0.06);
+  border: 1px solid rgba(124, 58, 237, 0.25);
   color: var(--cyber-cyan);
   transition: background 0.2s, box-shadow 0.2s;
 }
 .tech-tag:hover {
-  background: rgba(0, 245, 255, 0.12);
-  box-shadow: 0 0 8px rgba(0,245,255,0.3);
+  background: rgba(124, 58, 237, 0.14);
+  box-shadow: 0 0 8px rgba(124,58,237,0.25);
 }
 </style>

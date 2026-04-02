@@ -2,21 +2,19 @@
 
 /* ─── CSS 变量 ─────────────────────────────────── */
 :root {
-  --cyber-cyan:    #00f5ff;
-  --cyber-green:   #39ff14;
-  --cyber-purple:  #bf5fff;
-  --cyber-orange:  #ff6b35;
-  --bg-primary:    #020c14;
-  --bg-card:       #050f1a;
-  --bg-card-hover: #071624;
-  --border-dim:    rgba(0, 245, 255, 0.15);
-  --border-bright: rgba(0, 245, 255, 0.6);
-  --text-primary:  #e0f4ff;
-  --text-muted:    #4a7fa5;
-  --text-dim:      #2a4a65;
-  --glow-cyan:     0 0 10px #00f5ff, 0 0 20px rgba(0,245,255,0.4), 0 0 40px rgba(0,245,255,0.2);
-  --glow-green:    0 0 10px #39ff14, 0 0 20px rgba(57,255,20,0.4);
-  --glow-purple:   0 0 10px #bf5fff, 0 0 20px rgba(191,95,255,0.4);
+  --accent:        #4f5fa8;   /* 主强调：蓝紫 */
+  --accent-dark:   #3a4a8f;   /* 深蓝紫 hover */
+  --accent-light:  #e8eaf6;   /* 浅蓝紫背景 */
+  --bg-primary:    #f7f8fc;   /* 页面背景：极浅蓝灰 */
+  --bg-card:       #ffffff;   /* 卡片：纯白 */
+  --border-dim:    #e2e5f0;   /* 边框：浅灰蓝 */
+  --border-bright: #b0b8e0;   /* 边框高亮 */
+  --text-primary:  #1a1f3a;   /* 主文字：深蓝黑 */
+  --text-muted:    #4a5568;   /* 次文字：蓝灰 */
+  --text-dim:      #8a94b0;   /* 辅助文字：浅蓝灰 */
+  --shadow-sm:     0 2px 8px rgba(79,95,168,0.08);
+  --shadow-md:     0 8px 24px rgba(79,95,168,0.12);
+  --shadow-lg:     0 16px 48px rgba(79,95,168,0.16);
 }
 
 @layer base {
@@ -26,28 +24,21 @@
 
   body {
     margin: 0;
-    font-family: 'Noto Sans SC', 'Share Tech Mono', system-ui, sans-serif;
+    font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    background-image: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 245, 255, 0.012) 2px,
-      rgba(0, 245, 255, 0.012) 4px
-    );
   }
 
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg-primary); }
   ::-webkit-scrollbar-thumb {
-    background: var(--cyber-cyan);
-    box-shadow: var(--glow-cyan);
+    background: var(--border-bright);
+    border-radius: 2px;
   }
 
   ::selection {
-    background: rgba(0, 245, 255, 0.25);
-    color: #fff;
+    background: rgba(79, 95, 168, 0.15);
+    color: var(--text-primary);
   }
 }
 
@@ -63,57 +54,25 @@
     position: relative;
     background: var(--bg-card);
     border: 1px solid var(--border-dim);
-    border-radius: 2px;
+    border-radius: 12px;
     padding: 2rem;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
   }
 
   .cyber-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
     border-color: var(--border-bright);
-    box-shadow: 0 0 30px rgba(0,245,255,0.08), inset 0 0 30px rgba(0,245,255,0.02);
-  }
-
-  /* 左上角装饰 */
-  .cyber-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 18px; height: 18px;
-    border-top: 2px solid var(--cyber-cyan);
-    border-left: 2px solid var(--cyber-cyan);
-    box-shadow: -1px -1px 8px rgba(0,245,255,0.5);
-    pointer-events: none;
-  }
-
-  /* 右下角装饰 */
-  .cyber-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 18px; height: 18px;
-    border-bottom: 2px solid var(--cyber-cyan);
-    border-right: 2px solid var(--cyber-cyan);
-    box-shadow: 1px 1px 8px rgba(0,245,255,0.5);
-    pointer-events: none;
-  }
-
-  /* IntersectionObserver 触发后添加此 class */
-  .cyber-card.is-visible {
-    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   /* Section 标题 */
   .cyber-section-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--cyber-cyan);
-    text-shadow: 0 0 10px rgba(0,245,255,0.6);
+    color: var(--accent);
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -121,54 +80,32 @@
   }
 
   .cyber-section-title::before {
-    content: '//';
-    color: var(--cyber-purple);
-    font-size: 0.9rem;
-    text-shadow: var(--glow-purple);
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
   }
 
   .cyber-section-title::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, var(--border-bright), transparent);
+    background: var(--border-dim);
   }
 }
 
 /* ─── Keyframes ─────────────────────────────────── */
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-40px); }
+  from { opacity: 0; transform: translateX(-20px); }
   to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes neonPulse {
-  0%, 100% { box-shadow: 0 0 6px var(--cyber-cyan), 0 0 12px rgba(0,245,255,0.4); }
-  50%       { box-shadow: 0 0 14px var(--cyber-cyan), 0 0 28px rgba(0,245,255,0.7), 0 0 50px rgba(0,245,255,0.3); }
-}
-
-@keyframes glitch {
-  0%   { clip-path: inset(40% 0 61% 0); transform: translate(-3px, 0); }
-  20%  { clip-path: inset(92% 0 1% 0);  transform: translate(3px, 0); }
-  40%  { clip-path: inset(43% 0 1% 0);  transform: translate(-3px, 0); }
-  60%  { clip-path: inset(25% 0 58% 0); transform: translate(3px, 0); }
-  80%  { clip-path: inset(54% 0 7% 0);  transform: translate(-3px, 0); }
-  100% { clip-path: inset(58% 0 43% 0); transform: translate(0, 0); }
-}
-
-@keyframes scanSweep {
-  0%   { transform: translateY(-100%); opacity: 0.9; }
-  100% { transform: translateY(200%);  opacity: 0; }
-}
-
-@keyframes rotateScan {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
 }
 
 @keyframes loadBar {
@@ -186,7 +123,17 @@
   to   { transform: scaleY(1); }
 }
 
-@keyframes borderGlow {
-  0%, 100% { border-color: var(--border-dim); }
-  50%       { border-color: var(--border-bright); }
+@keyframes rotateScan {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes scanSweep {
+  0%   { transform: translateY(-100%); opacity: 0.6; }
+  100% { transform: translateY(200%);  opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
 }

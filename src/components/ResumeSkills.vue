@@ -4,8 +4,7 @@ import { onMounted } from 'vue'
 // 技能列表（带进度值）
 const skillGroups = [
   {
-    category: 'FRONTEND_CORE',
-    label: '前端框架',
+    category: '前端框架',
     skills: [
       { name: 'Vue 3', level: 92 },
       { name: 'React', level: 80 },
@@ -14,8 +13,7 @@ const skillGroups = [
     ],
   },
   {
-    category: 'STYLING_SYS',
-    label: '样式',
+    category: '样式',
     skills: [
       { name: 'Tailwind CSS', level: 90 },
       { name: 'SCSS/SASS', level: 82 },
@@ -24,8 +22,7 @@ const skillGroups = [
     ],
   },
   {
-    category: 'TOOLCHAIN',
-    label: '工程化',
+    category: '工程化',
     skills: [
       { name: 'Vite', level: 88 },
       { name: 'Webpack', level: 75 },
@@ -34,8 +31,7 @@ const skillGroups = [
     ],
   },
   {
-    category: 'OTHER_MODULES',
-    label: '其他',
+    category: '其他',
     skills: [
       { name: 'Node.js', level: 72 },
       { name: 'RESTful API', level: 85 },
@@ -48,17 +44,15 @@ const skillGroups = [
 onMounted(() => {
   const section = document.querySelector('.skills-section')
   if (!section) return
-
   const observer = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
       observer.disconnect()
       section.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
-        bar.style.animationDelay = `${i * 0.07}s`
+        bar.style.animationDelay = `${i * 0.06}s`
         bar.classList.add('skill-bar-animate')
       })
     }
-  }, { threshold: 0.15 })
-
+  }, { threshold: 0.1 })
   observer.observe(section)
 })
 </script>
@@ -70,32 +64,18 @@ onMounted(() => {
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div v-for="group in skillGroups" :key="group.category">
         <!-- 分类标题 -->
-        <p class="font-terminal text-xs mb-4" style="color: var(--cyber-purple); letter-spacing: 0.12em;">
-          [ {{ group.category }} ]
+        <p class="text-xs font-semibold mb-4 uppercase tracking-widest" style="color: var(--text-dim);">
+          {{ group.category }}
         </p>
 
-        <!-- 技能条列表 -->
         <div class="space-y-4">
-          <div
-            v-for="skill in group.skills"
-            :key="skill.name"
-            class="skill-row"
-          >
-            <!-- 名称 + 百分比 -->
+          <div v-for="skill in group.skills" :key="skill.name" class="skill-row">
             <div class="flex justify-between mb-1.5">
-              <span class="font-terminal text-xs" style="color: var(--text-primary);">
-                {{ skill.name.toUpperCase() }}
-              </span>
-              <span class="font-terminal text-xs" style="color: var(--cyber-cyan);">
-                {{ skill.level }}%
-              </span>
+              <span class="text-sm" style="color: var(--text-primary);">{{ skill.name }}</span>
+              <span class="text-xs font-medium" style="color: var(--accent);">{{ skill.level }}%</span>
             </div>
-            <!-- 轨道 + 进度条 -->
             <div class="skill-track">
-              <div
-                class="skill-bar-fill"
-                :style="`--bar-width: ${skill.level}%`"
-              />
+              <div class="skill-bar-fill" :style="`--bar-width: ${skill.level}%`" />
             </div>
           </div>
         </div>
@@ -106,43 +86,25 @@ onMounted(() => {
 
 <style scoped>
 .skill-track {
-  height: 3px;
-  background: rgba(0, 245, 255, 0.08);
-  position: relative;
-  overflow: visible;
+  height: 6px;
+  background: var(--accent-light);
+  border-radius: 99px;
+  overflow: hidden;
 }
 
 .skill-bar-fill {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg, var(--cyber-purple), var(--cyber-cyan));
-  box-shadow: 0 0 8px var(--cyber-cyan);
-  position: relative;
+  background: linear-gradient(90deg, var(--accent), #7b8fd4);
+  border-radius: 99px;
   transition: box-shadow 0.3s;
 }
 
-/* 进度条右端光点 */
-.skill-bar-fill::after {
-  content: '';
-  position: absolute;
-  right: -3px;
-  top: -3px;
-  width: 9px;
-  height: 9px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--cyber-cyan), 0 0 16px var(--cyber-cyan);
-}
-
-/* IntersectionObserver 触发后添加此 class */
 .skill-bar-animate {
-  animation: loadBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: loadBar 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .skill-row:hover .skill-bar-fill {
-  box-shadow: 0 0 16px var(--cyber-cyan), 0 0 4px white;
-}
-.skill-row:hover .font-terminal {
-  color: var(--cyber-cyan) !important;
+  box-shadow: 0 0 8px rgba(79,95,168,0.4);
 }
 </style>
