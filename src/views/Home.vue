@@ -95,7 +95,7 @@ onUnmounted(() => {
     <main class="content">
       <p class="sys-label">SYSTEM ONLINE // v2.1</p>
 
-      <h1 class="name">张三 / ZHANG SAN</h1>
+      <h1 class="name">耀天 / ALEX</h1>
 
       <p class="title-line">
         <span>{{ displayedTitle }}</span>

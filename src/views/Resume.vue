@@ -22,7 +22,7 @@ import ResumeEducation from '../components/ResumeEducation.vue'
       <ResumeEducation />
     </div>
     <p class="text-center mt-10 text-xs" style="color: var(--text-dim); letter-spacing: 0.1em;">
-      © 2024 Zhang San · Frontend Developer
+      © 2024 Alex · Frontend Developer
     </p>
   </div>
 </template>

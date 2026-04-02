@@ -3,15 +3,15 @@ import { ref, onMounted } from 'vue'
 
 // 个人基本信息
 const info = {
-  name: '张三',
-  nameEn: 'Zhang San',
+  name: '耀天',
+  nameEn: 'Alex',
   title: '前端开发工程师',
   titleEn: 'Frontend Developer',
-  email: 'zhangsan@example.com',
+  email: 'alex@example.com',
   phone: '+86 138-0000-0000',
   location: '上海，中国',
-  github: 'github.com/zhangsan',
-  linkedin: 'linkedin.com/in/zhangsan',
+  github: 'github.com/alex',
+  linkedin: 'linkedin.com/in/alex',
 }
 </script>
 

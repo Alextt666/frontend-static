@@ -9,7 +9,7 @@ const projects = [
     period: '2023.06 → 2023.12',
     desc: '负责前端整体架构设计与开发，实现多维度数据图表展示、实时数据推送及权限管理模块。',
     descEn: 'Led frontend architecture design and development, implementing multi-dimensional data charts, real-time data push, and permission management modules.',
-    link: 'github.com/zhangsan/data-viz',
+    link: 'github.com/alex/data-viz',
   },
   {
     name: '移动端电商 H5 / Mobile E-commerce H5',
@@ -25,7 +25,7 @@ const projects = [
     period: '2022.03 → 2022.08',
     desc: '设计并实现基于 JSON Schema 的动态表单引擎，支持拖拽配置，减少重复开发工作量约 60%。',
     descEn: 'Designed and implemented a JSON Schema-based dynamic form engine with drag-and-drop configuration, reducing repetitive development by ~60%.',
-    link: 'github.com/zhangsan/form-engine',
+    link: 'github.com/alex/form-engine',
   },
 ]
 
