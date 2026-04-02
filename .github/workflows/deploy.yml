@@ -33,3 +33,11 @@ jobs:
           target: "/home/ubuntu/resume"
           strip_components: 1
           rm: true
+
+      - name: 重启 Nginx 容器
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: docker restart nginx
