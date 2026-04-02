@@ -1,13 +1,192 @@
 @import "tailwindcss";
 
+/* ─── CSS 变量 ─────────────────────────────────── */
+:root {
+  --cyber-cyan:    #00f5ff;
+  --cyber-green:   #39ff14;
+  --cyber-purple:  #bf5fff;
+  --cyber-orange:  #ff6b35;
+  --bg-primary:    #020c14;
+  --bg-card:       #050f1a;
+  --bg-card-hover: #071624;
+  --border-dim:    rgba(0, 245, 255, 0.15);
+  --border-bright: rgba(0, 245, 255, 0.6);
+  --text-primary:  #e0f4ff;
+  --text-muted:    #4a7fa5;
+  --text-dim:      #2a4a65;
+  --glow-cyan:     0 0 10px #00f5ff, 0 0 20px rgba(0,245,255,0.4), 0 0 40px rgba(0,245,255,0.2);
+  --glow-green:    0 0 10px #39ff14, 0 0 20px rgba(57,255,20,0.4);
+  --glow-purple:   0 0 10px #bf5fff, 0 0 20px rgba(191,95,255,0.4);
+}
+
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
   body {
     margin: 0;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: #f3f4f6;
-    color: #1f2937;
+    font-family: 'Noto Sans SC', 'Share Tech Mono', system-ui, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 245, 255, 0.012) 2px,
+      rgba(0, 245, 255, 0.012) 4px
+    );
   }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--cyber-cyan);
+    box-shadow: var(--glow-cyan);
+  }
+
+  ::selection {
+    background: rgba(0, 245, 255, 0.25);
+    color: #fff;
+  }
+}
+
+/* ─── 自定义工具类 ──────────────────────────────── */
+@layer utilities {
+  .font-orbitron { font-family: 'Orbitron', sans-serif; }
+  .font-terminal { font-family: 'Share Tech Mono', monospace; }
+}
+
+/* ─── 全局组件样式 ──────────────────────────────── */
+@layer components {
+  .cyber-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-dim);
+    border-radius: 2px;
+    padding: 2rem;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .cyber-card:hover {
+    border-color: var(--border-bright);
+    box-shadow: 0 0 30px rgba(0,245,255,0.08), inset 0 0 30px rgba(0,245,255,0.02);
+  }
+
+  /* 左上角装饰 */
+  .cyber-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 18px; height: 18px;
+    border-top: 2px solid var(--cyber-cyan);
+    border-left: 2px solid var(--cyber-cyan);
+    box-shadow: -1px -1px 8px rgba(0,245,255,0.5);
+    pointer-events: none;
+  }
+
+  /* 右下角装饰 */
+  .cyber-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 18px; height: 18px;
+    border-bottom: 2px solid var(--cyber-cyan);
+    border-right: 2px solid var(--cyber-cyan);
+    box-shadow: 1px 1px 8px rgba(0,245,255,0.5);
+    pointer-events: none;
+  }
+
+  /* IntersectionObserver 触发后添加此 class */
+  .cyber-card.is-visible {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Section 标题 */
+  .cyber-section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyber-cyan);
+    text-shadow: 0 0 10px rgba(0,245,255,0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cyber-section-title::before {
+    content: '//';
+    color: var(--cyber-purple);
+    font-size: 0.9rem;
+    text-shadow: var(--glow-purple);
+  }
+
+  .cyber-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-bright), transparent);
+  }
+}
+
+/* ─── Keyframes ─────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 6px var(--cyber-cyan), 0 0 12px rgba(0,245,255,0.4); }
+  50%       { box-shadow: 0 0 14px var(--cyber-cyan), 0 0 28px rgba(0,245,255,0.7), 0 0 50px rgba(0,245,255,0.3); }
+}
+
+@keyframes glitch {
+  0%   { clip-path: inset(40% 0 61% 0); transform: translate(-3px, 0); }
+  20%  { clip-path: inset(92% 0 1% 0);  transform: translate(3px, 0); }
+  40%  { clip-path: inset(43% 0 1% 0);  transform: translate(-3px, 0); }
+  60%  { clip-path: inset(25% 0 58% 0); transform: translate(3px, 0); }
+  80%  { clip-path: inset(54% 0 7% 0);  transform: translate(-3px, 0); }
+  100% { clip-path: inset(58% 0 43% 0); transform: translate(0, 0); }
+}
+
+@keyframes scanSweep {
+  0%   { transform: translateY(-100%); opacity: 0.9; }
+  100% { transform: translateY(200%);  opacity: 0; }
+}
+
+@keyframes rotateScan {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes loadBar {
+  from { width: 0%; }
+  to   { width: var(--bar-width, 80%); }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes timelineGrow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: var(--border-dim); }
+  50%       { border-color: var(--border-bright); }
 }

@@ -1,11 +1,13 @@
 <script setup>
+import { onMounted } from 'vue'
+
 // 工作经历
 const experiences = [
   {
     company: '某科技有限公司 / Tech Co., Ltd.',
     role: '高级前端工程师 / Senior Frontend Developer',
-    period: '2022.03 — 至今 / Present',
-    location: '上海 / Shanghai',
+    period: '2022.03 → PRESENT',
+    location: 'SH',
     points: [
       '主导公司核心产品前端架构重构，将页面加载速度提升 40%',
       '带领 3 人前端小组，推动组件库建设，复用率提升至 70%',
@@ -17,8 +19,8 @@ const experiences = [
   {
     company: '某互联网公司 / Internet Company',
     role: '前端开发工程师 / Frontend Developer',
-    period: '2019.07 — 2022.02',
-    location: '北京 / Beijing',
+    period: '2019.07 → 2022.02',
+    location: 'BJ',
     points: [
       '参与多个 B 端管理系统开发，使用 Vue 2/3 + Element UI',
       '负责移动端 H5 页面开发，适配主流机型',
@@ -27,41 +29,134 @@ const experiences = [
     ],
   },
 ]
+
+onMounted(() => {
+  const section = document.querySelector('.experience-section')
+  if (!section) return
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      observer.disconnect()
+      // 时间线生长
+      const line = section.querySelector('.timeline-line')
+      if (line) line.classList.add('timeline-grow')
+      // 每个条目依次滑入
+      section.querySelectorAll('.exp-item').forEach((el, i) => {
+        el.style.animationDelay = `${0.2 + i * 0.2}s`
+        el.classList.add('exp-item-visible')
+      })
+    }
+  }, { threshold: 0.1 })
+
+  observer.observe(section)
+})
 </script>
 
 <template>
-  <div class="bg-white rounded-2xl shadow-sm p-8">
-    <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-      <span class="w-1 h-6 bg-blue-500 rounded-full inline-block"></span>
-      工作经历 / Experience
-    </h2>
-    <div class="space-y-8">
-      <div v-for="exp in experiences" :key="exp.company" class="relative pl-6 border-l-2 border-gray-100">
-        <!-- 时间轴圆点 -->
-        <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow"></div>
+  <div class="cyber-card experience-section">
+    <h2 class="cyber-section-title">工作经历 / Experience</h2>
 
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-          <div>
-            <h3 class="text-base font-bold text-gray-900">{{ exp.role }}</h3>
-            <p class="text-sm text-blue-600 font-medium">{{ exp.company }}</p>
+    <div class="relative">
+      <!-- 时间线竖线 -->
+      <div class="timeline-line" />
+
+      <div class="space-y-10 pl-8">
+        <div
+          v-for="(exp, idx) in experiences"
+          :key="exp.company"
+          class="exp-item relative"
+        >
+          <!-- 菱形节点 -->
+          <div class="node-diamond" />
+
+          <!-- 头部：角色 + 时间 -->
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="font-orbitron text-sm font-bold" style="color: var(--text-primary);">
+                {{ exp.role }}
+              </h3>
+              <p class="font-terminal text-xs mt-1" style="color: var(--cyber-cyan); text-shadow: 0 0 8px rgba(0,245,255,0.5);">
+                {{ exp.company }}
+              </p>
+            </div>
+            <div class="shrink-0 text-right">
+              <p class="font-terminal text-xs" style="color: var(--text-dim);">
+                [ {{ exp.period }} ]
+              </p>
+              <p class="font-terminal text-xs mt-0.5" style="color: var(--text-dim);">
+                [ {{ exp.location }} ]
+              </p>
+            </div>
           </div>
-          <div class="text-right text-sm text-gray-500 shrink-0">
-            <p>{{ exp.period }}</p>
-            <p>{{ exp.location }}</p>
-          </div>
+
+          <!-- 要点列表 -->
+          <ul class="space-y-2">
+            <li
+              v-for="(point, i) in exp.points"
+              :key="i"
+              class="point-item flex items-start gap-2 text-sm"
+              style="color: var(--text-muted);"
+            >
+              <span class="shrink-0 mt-0.5 font-terminal text-xs" style="color: var(--cyber-green);">▶</span>
+              <span>{{ point }}</span>
+            </li>
+          </ul>
         </div>
-
-        <ul class="mt-3 space-y-1">
-          <li
-            v-for="(point, i) in exp.points"
-            :key="i"
-            class="text-sm text-gray-600 flex items-start gap-2"
-          >
-            <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0"></span>
-            {{ point }}
-          </li>
-        </ul>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+/* 时间线竖线 */
+.timeline-line {
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--cyber-cyan), var(--cyber-purple));
+  transform: scaleY(0);
+  transform-origin: top;
+  box-shadow: 0 0 8px rgba(0,245,255,0.4);
+}
+
+.timeline-line.timeline-grow {
+  animation: timelineGrow 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+/* 菱形节点 */
+.node-diamond {
+  position: absolute;
+  left: -26px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  background: var(--cyber-cyan);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px var(--cyber-cyan), 0 0 16px rgba(0,245,255,0.5);
+  animation: neonPulse 2.5s ease-in-out infinite;
+}
+
+/* 经历条目入场 */
+.exp-item {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.exp-item.exp-item-visible {
+  animation: slideInLeft 0.5s ease forwards;
+}
+
+/* 要点 hover */
+.point-item {
+  transition: color 0.2s ease;
+  cursor: default;
+}
+.point-item:hover {
+  color: var(--text-primary) !important;
+}
+.point-item:hover span:first-child {
+  text-shadow: var(--glow-green);
+}
+</style>

@@ -1,45 +1,45 @@
-name: Deploy to COS
+# name: Deploy to COS
 
-on:
-  push:
-    branches: [main, master]
+# on:
+#   push:
+#     branches: [main, master]
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '20'
       
-      - name: 安装
-        run: npm ci  # 使用clean install保证依赖一致性
+#       - name: 安装
+#         run: npm ci  # 使用clean install保证依赖一致性
       
       
-      - name: 构建项目
-        run: npm run build
+#       - name: 构建项目
+#         run: npm run build
       
-      - name: Install COS CLI
-        run: |
-          wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-386
-          chmod +x coscli-linux-386
-          sudo mv coscli-linux-386 /usr/local/bin/coscli
+#       - name: Install COS CLI
+#         run: |
+#           wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-386
+#           chmod +x coscli-linux-386
+#           sudo mv coscli-linux-386 /usr/local/bin/coscli
       
-      - name: Configure COS CLI
-        run: |
-          coscli config set \
-            --secret_id ${{ secrets.COS_SECRET_ID }} \
-            --secret_key ${{ secrets.COS_SECRET_KEY }} \
-      - name: Configure COS ADD
-        run: |
-          coscli config add \
-            -b ${{ secrets.COS_BUCKET }} \
-            -r ${{ secrets.COS_REGION }} \
-      - name: Sync to COS
-        run: |
-          coscli sync ./dist/ cos://${{ secrets.COS_BUCKET }}/static/ -r
+#       - name: Configure COS CLI
+#         run: |
+#           coscli config set \
+#             --secret_id ${{ secrets.COS_SECRET_ID }} \
+#             --secret_key ${{ secrets.COS_SECRET_KEY }} \
+#       - name: Configure COS ADD
+#         run: |
+#           coscli config add \
+#             -b ${{ secrets.COS_BUCKET }} \
+#             -r ${{ secrets.COS_REGION }} \
+#       - name: Sync to COS
+#         run: |
+#           coscli sync ./dist/ cos://${{ secrets.COS_BUCKET }}/static/ -r

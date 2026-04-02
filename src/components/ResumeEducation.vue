@@ -4,35 +4,77 @@ const educations = [
   {
     school: '某某大学 / XX University',
     degree: '计算机科学与技术 学士 / B.S. in Computer Science',
-    period: '2015.09 — 2019.06',
-    gpa: 'GPA: 3.8 / 4.0',
+    period: '2015.09 → 2019.06',
+    gpa: '3.8 / 4.0',
     honors: ['优秀毕业生 / Outstanding Graduate', '国家奖学金 / National Scholarship'],
   },
 ]
 </script>
 
 <template>
-  <div class="bg-white rounded-2xl shadow-sm p-8">
-    <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-      <span class="w-1 h-6 bg-blue-500 rounded-full inline-block"></span>
-      教育背景 / Education
-    </h2>
-    <div v-for="edu in educations" :key="edu.school" class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+  <div class="cyber-card">
+    <!-- 认证标记 -->
+    <p class="font-terminal text-xs mb-4" style="color: var(--cyber-purple); letter-spacing: 0.1em;">
+      ACCESS_LEVEL :: VERIFIED &nbsp;✓
+    </p>
+
+    <h2 class="cyber-section-title">教育背景 / Education</h2>
+
+    <div
+      v-for="edu in educations"
+      :key="edu.school"
+      class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4"
+    >
       <div>
-        <h3 class="text-base font-bold text-gray-900">{{ edu.school }}</h3>
-        <p class="text-sm text-blue-600 font-medium mt-0.5">{{ edu.degree }}</p>
-        <p class="text-sm text-gray-500 mt-1">{{ edu.gpa }}</p>
-        <div class="flex flex-wrap gap-2 mt-2">
+        <!-- 院校名 -->
+        <h3 class="font-orbitron text-sm font-bold" style="color: var(--text-primary);">
+          {{ edu.school }}
+        </h3>
+
+        <!-- 专业 -->
+        <p
+          class="font-terminal text-xs mt-1.5"
+          style="color: var(--cyber-cyan); text-shadow: 0 0 8px rgba(0,245,255,0.5);"
+        >
+          {{ edu.degree }}
+        </p>
+
+        <!-- GPA -->
+        <p class="font-terminal text-xs mt-2" style="color: var(--cyber-green);">
+          SYS_SCORE :: {{ edu.gpa }}
+        </p>
+
+        <!-- 荣誉 badges -->
+        <div class="flex flex-wrap gap-2 mt-3">
           <span
             v-for="honor in edu.honors"
             :key="honor"
-            class="px-2 py-0.5 bg-yellow-50 text-yellow-700 rounded text-xs font-medium"
+            class="honor-badge font-terminal text-xs"
           >
-            {{ honor }}
+            ✓ {{ honor }}
           </span>
         </div>
       </div>
-      <p class="text-sm text-gray-500 shrink-0">{{ edu.period }}</p>
+
+      <!-- 时间 -->
+      <p class="font-terminal text-xs shrink-0" style="color: var(--text-dim);">
+        [ {{ edu.period }} ]
+      </p>
     </div>
   </div>
 </template>
+
+<style scoped>
+.honor-badge {
+  padding: 3px 10px;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  color: var(--cyber-cyan);
+  background: rgba(0, 245, 255, 0.04);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+.honor-badge:hover {
+  background: rgba(0, 245, 255, 0.12);
+  box-shadow: 0 0 10px rgba(0,245,255,0.3);
+}
+</style>
