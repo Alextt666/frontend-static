@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted } from 'vue'
 
-// 技能列表（带进度值）
 const skillGroups = [
   {
     category: '前端框架',
@@ -48,7 +47,7 @@ onMounted(() => {
     if (entries[0].isIntersecting) {
       observer.disconnect()
       section.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
-        bar.style.animationDelay = `${i * 0.06}s`
+        bar.style.animationDelay = `${i * 0.05}s`
         bar.classList.add('skill-bar-animate')
       })
     }
@@ -58,21 +57,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="cyber-card skills-section">
-    <h2 class="cyber-section-title">技能 / Skills</h2>
+  <div class="resume-card skills-section">
+    <h2 class="section-title">技能 / Skills</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div v-for="group in skillGroups" :key="group.category">
-        <!-- 分类标题 -->
-        <p class="text-xs font-semibold mb-4 uppercase tracking-widest" style="color: var(--text-dim);">
+        <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--text-dim);">
           {{ group.category }}
         </p>
-
-        <div class="space-y-4">
-          <div v-for="skill in group.skills" :key="skill.name" class="skill-row">
-            <div class="flex justify-between mb-1.5">
-              <span class="text-sm" style="color: var(--text-primary);">{{ skill.name }}</span>
-              <span class="text-xs font-medium" style="color: var(--accent);">{{ skill.level }}%</span>
+        <div class="space-y-3">
+          <div v-for="skill in group.skills" :key="skill.name">
+            <div class="flex justify-between mb-1">
+              <span class="text-xs" style="color: var(--text-primary);">{{ skill.name }}</span>
+              <span class="text-xs" style="color: var(--text-dim);">{{ skill.level }}%</span>
             </div>
             <div class="skill-track">
               <div class="skill-bar-fill" :style="`--bar-width: ${skill.level}%`" />
@@ -86,25 +83,18 @@ onMounted(() => {
 
 <style scoped>
 .skill-track {
-  height: 6px;
+  height: 5px;
   background: var(--accent-light);
   border-radius: 99px;
   overflow: hidden;
 }
-
 .skill-bar-fill {
   height: 100%;
   width: 0;
   background: linear-gradient(90deg, var(--accent), #7b8fd4);
   border-radius: 99px;
-  transition: box-shadow 0.3s;
 }
-
 .skill-bar-animate {
-  animation: loadBar 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.skill-row:hover .skill-bar-fill {
-  box-shadow: 0 0 8px rgba(79,95,168,0.4);
+  animation: loadBar 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 </style>

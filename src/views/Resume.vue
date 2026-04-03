@@ -9,11 +9,14 @@ import ResumeEducation from '../components/ResumeEducation.vue'
 </script>
 
 <template>
-  <div class="min-h-screen py-10 px-4" style="background: var(--bg-primary);">
-    <div class="max-w-4xl mx-auto mb-4">
-      <RouterLink to="/" class="back-link">← BACK_TO_HOME</RouterLink>
+  <div class="min-h-screen py-8 px-4" style="background: var(--bg-primary);">
+    <!-- 返回链接 -->
+    <div class="max-w-3xl mx-auto mb-5">
+      <RouterLink to="/" class="back-link">← 返回首页</RouterLink>
     </div>
-    <div class="max-w-4xl mx-auto space-y-5">
+
+    <!-- 简历主体 -->
+    <div class="max-w-3xl mx-auto space-y-4">
       <ResumeHeader />
       <ResumeAbout />
       <ResumeSkills />
@@ -21,7 +24,8 @@ import ResumeEducation from '../components/ResumeEducation.vue'
       <ResumeProjects />
       <ResumeEducation />
     </div>
-    <p class="text-center mt-10 text-xs" style="color: var(--text-dim); letter-spacing: 0.1em;">
+
+    <p class="text-center mt-8 text-xs" style="color: var(--text-dim);">
       © 2024 Alex · Frontend Developer
     </p>
   </div>
@@ -29,9 +33,7 @@ import ResumeEducation from '../components/ResumeEducation.vue'
 
 <style scoped>
 .back-link {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  font-size: 0.75rem;
   color: var(--text-dim);
   text-decoration: none;
   transition: color 0.2s;
