@@ -1,13 +1,6 @@
 <script setup>
-const educations = [
-  {
-    school: '某某大学 / XX University',
-    degree: '计算机科学与技术 学士 / B.S. in Computer Science',
-    period: '2015.09 — 2019.06',
-    gpa: '3.8 / 4.0',
-    honors: ['优秀毕业生 / Outstanding Graduate', '国家奖学金 / National Scholarship'],
-  },
-]
+const props = defineProps({ data: Array })
+const educations = props.data
 </script>
 
 <template>

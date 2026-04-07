@@ -1,44 +1,8 @@
 <script setup>
 import { onMounted } from 'vue'
 
-const skillGroups = [
-  {
-    category: '前端框架',
-    skills: [
-      { name: 'Vue 3', level: 92 },
-      { name: 'React', level: 80 },
-      { name: 'TypeScript', level: 85 },
-      { name: 'JavaScript ES6+', level: 95 },
-    ],
-  },
-  {
-    category: '样式',
-    skills: [
-      { name: 'Tailwind CSS', level: 90 },
-      { name: 'SCSS/SASS', level: 82 },
-      { name: 'CSS3', level: 88 },
-      { name: 'Element Plus', level: 78 },
-    ],
-  },
-  {
-    category: '工程化',
-    skills: [
-      { name: 'Vite', level: 88 },
-      { name: 'Webpack', level: 75 },
-      { name: 'Git', level: 90 },
-      { name: 'ESLint / Prettier', level: 85 },
-    ],
-  },
-  {
-    category: '其他',
-    skills: [
-      { name: 'Node.js', level: 72 },
-      { name: 'RESTful API', level: 85 },
-      { name: 'Figma', level: 70 },
-      { name: 'Agile / Scrum', level: 80 },
-    ],
-  },
-]
+const props = defineProps({ data: Array })
+const skillGroups = props.data
 
 onMounted(() => {
   const section = document.querySelector('.skills-section')

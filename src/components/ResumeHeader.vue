@@ -1,15 +1,6 @@
 <script setup>
-const info = {
-  name: '耀天',
-  nameEn: 'Alex',
-  title: '前端开发工程师',
-  titleEn: 'Frontend Developer',
-  email: 'alex@example.com',
-  phone: '+86 138-0000-0000',
-  location: '上海，中国',
-  github: 'github.com/alex',
-  linkedin: 'linkedin.com/in/alex',
-}
+const props = defineProps({ data: Object })
+const info = props.data
 </script>
 
 <template>

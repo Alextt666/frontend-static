@@ -1,35 +1,8 @@
 <script setup>
 import { onMounted } from 'vue'
 
-const projects = [
-  {
-    name: '企业数据可视化平台',
-    nameEn: 'Enterprise Data Visualization Platform',
-    tech: ['Vue 3', 'ECharts', 'TypeScript', 'Tailwind CSS'],
-    period: '2023.06 — 2023.12',
-    desc: '负责前端整体架构设计与开发，实现多维度数据图表展示、实时数据推送及权限管理模块。',
-    descEn: 'Led frontend architecture design and development, implementing multi-dimensional data charts, real-time data push, and permission management modules.',
-    link: 'github.com/alex/data-viz',
-  },
-  {
-    name: '移动端电商 H5',
-    nameEn: 'Mobile E-commerce H5',
-    tech: ['Vue 3', 'Vant', 'Pinia', 'Vite'],
-    period: '2022.09 — 2023.02',
-    desc: '独立开发移动端电商页面，包含商品列表、购物车、订单流程等核心功能，日活用户超 10 万。',
-    descEn: 'Independently developed mobile e-commerce pages including product listing, cart, and order flow. Reached 100k+ daily active users.',
-    link: '',
-  },
-  {
-    name: '低代码表单引擎',
-    nameEn: 'Low-code Form Engine',
-    tech: ['Vue 3', 'TypeScript', 'JSON Schema'],
-    period: '2022.03 — 2022.08',
-    desc: '设计并实现基于 JSON Schema 的动态表单引擎，支持拖拽配置，减少重复开发工作量约 60%。',
-    descEn: 'Designed and implemented a JSON Schema-based dynamic form engine with drag-and-drop configuration, reducing repetitive development by ~60%.',
-    link: 'github.com/alex/form-engine',
-  },
-]
+const props = defineProps({ data: Array })
+const projects = props.data
 
 onMounted(() => {
   const section = document.querySelector('.projects-section')
