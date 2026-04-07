@@ -60,7 +60,7 @@ onMounted(fetchResume)
     </div>
 
     <!-- 正常渲染 -->
-    <div v-else class="max-w-3xl mx-auto space-y-4">
+    <div v-else-if="resumeData" class="max-w-3xl mx-auto space-y-4">
       <ResumeHeader :data="resumeData.header" />
       <ResumeAbout :data="resumeData.about" />
       <ResumeSkills :data="resumeData.skills" />
