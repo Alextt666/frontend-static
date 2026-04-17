@@ -55,7 +55,7 @@ onMounted(() => {
 .skill-bar-fill {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg, var(--accent), #7b8fd4);
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
   border-radius: 99px;
 }
 .skill-bar-animate {

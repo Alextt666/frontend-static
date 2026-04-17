@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
 import AppSidebar from './components/AppSidebar.vue'
+import AppToolbar from './components/AppToolbar.vue'
 
 const route = useRoute()
 </script>
@@ -8,6 +9,7 @@ const route = useRoute()
 <template>
   <div class="app-root">
     <AppSidebar />
+    <AppToolbar />
     <main class="app-main">
       <RouterView v-slot="{ Component }">
         <Transition name="fade" mode="out-in">

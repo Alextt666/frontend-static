@@ -68,7 +68,7 @@ const info = props.data
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-light), #d0d8f8);
+  background: linear-gradient(135deg, var(--accent-light), #c8e6f7);
   border: 2px solid var(--border-bright);
   display: flex;
   align-items: center;

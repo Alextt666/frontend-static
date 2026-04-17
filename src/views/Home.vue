@@ -136,25 +136,31 @@ import { RouterLink } from 'vue-router'
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.6rem;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
-.cta-btn:hover { transform: translateY(-2px); }
+.cta-btn:hover { transform: scale(1.03); }
 .cta-primary {
   background: var(--accent);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(59, 91, 219, 0.28);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
 }
-.cta-primary:hover { box-shadow: 0 6px 20px rgba(59, 91, 219, 0.38); }
+.cta-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
 .cta-secondary {
   background: var(--bg-card);
   color: var(--accent);
   border: 1px solid var(--accent);
 }
-.cta-secondary:hover { background: var(--accent-light); }
+.cta-secondary:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
 .cta-arrow {
   width: 1rem;
   height: 1rem;

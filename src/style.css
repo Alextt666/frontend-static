@@ -1,21 +1,41 @@
 @import "tailwindcss";
 
-/* ─── CSS 变量 ─────────────────────────────────── */
+/* ─── CSS 变量（Light 模式 · PlayStation 配色） ── */
 :root {
-  --accent:        #3b5bdb;
-  --accent-dark:   #2f4ac0;
-  --accent-light:  #eef1fd;
-  --bg-primary:    #f4f6fb;
-  --bg-card:       #ffffff;
-  --bg-sidebar:    #1e2a3a;
-  --border-dim:    #e4e8f0;
-  --border-bright: #c5cde8;
-  --text-primary:  #1a2035;
-  --text-muted:    #4a5568;
-  --text-dim:      #8896b0;
-  --text-sidebar:  #c8d6e8;
-  --shadow-sm:     0 1px 4px rgba(30,42,58,0.07);
-  --shadow-md:     0 4px 16px rgba(30,42,58,0.10);
+  --accent:        #0070cc;   /* PlayStation Blue */
+  --accent-dark:   #0058a3;   /* 按下态 */
+  --accent-hover:  #1eaedb;   /* PlayStation Cyan，仅用于 hover/focus */
+  --accent-light:  #e8f4fd;   /* 浅蓝背景 tag/track */
+  --bg-primary:    #f5f7fa;   /* Ice Mist */
+  --bg-card:       #ffffff;   /* Paper White */
+  --bg-sidebar:    #121314;   /* Shadow Black（PS 深色导航） */
+  --border-dim:    #e8ecf0;   /* Divider Tint 变体 */
+  --border-bright: #c8d4e0;
+  --text-primary:  #1f1f1f;   /* Deep Charcoal */
+  --text-muted:    #6b6b6b;   /* Body Gray */
+  --text-dim:      #aaaaaa;   /* Mute Gray 变体 */
+  --text-sidebar:  #cccccc;   /* Mute Gray */
+  --shadow-sm:     0 2px 9px rgba(0,0,0,0.06);   /* PS 最轻阴影 */
+  --shadow-md:     0 5px 9px rgba(0,0,0,0.16);   /* PS 强调阴影 */
+}
+
+/* ─── Dark 模式变量（Console Black 系） ─────────── */
+[data-theme="dark"] {
+  --accent:        #4da3ff;   /* 更亮的蓝色，深色面上更易读 */
+  --accent-dark:   #1883fd;
+  --accent-hover:  #6bb8ff;   /* 更柔和的 hover 色 */
+  --accent-light:  #1a2a3e;   /* 深色 tag/track 背景，提高对比度 */
+  --bg-primary:    #0d0f14;   /* 更深的背景 */
+  --bg-card:       #1a1d27;   /* 卡片背景 */
+  --bg-sidebar:    #000000;   /* Console Black */
+  --border-dim:    #2a2d3a;
+  --border-bright: #3a3f52;
+  --text-primary:  #e8eaf0;   /* 更亮的主文字 */
+  --text-muted:    #9aa0b8;   /* 次要文字 */
+  --text-dim:      #6a7088;   /* 三级文字 */
+  --text-sidebar:  #b0b8d0;
+  --shadow-sm:     0 2px 9px rgba(0,0,0,0.4);
+  --shadow-md:     0 5px 9px rgba(0,0,0,0.6);
 }
 
 @layer base {
@@ -32,7 +52,7 @@
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg-primary); }
   ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
-  ::selection { background: rgba(59,91,219,0.12); color: var(--text-primary); }
+  ::selection { background: rgba(77, 163, 255, 0.2); color: var(--text-primary); }
 }
 
 @layer utilities {

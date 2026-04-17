@@ -192,7 +192,7 @@ const navItems = [
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-light), #d0d8f8);
+  background: linear-gradient(135deg, var(--accent-light), #c8e6f7);
   border: 3px solid rgba(255, 255, 255, 0.12);
   display: flex;
   align-items: center;
@@ -204,7 +204,7 @@ const navItems = [
   cursor: pointer;
 }
 .sidebar-avatar:hover {
-  box-shadow: 0 0 0 5px rgba(59, 91, 219, 0.2);
+  box-shadow: 0 0 0 5px rgba(77, 163, 255, 0.25);
   transform: scale(1.02);
 }
 .avatar-text {
@@ -308,7 +308,7 @@ const navItems = [
   border-left-color: var(--accent);
 }
 .nav-item.router-link-exact-active {
-  background: rgba(59, 91, 219, 0.18);
+  background: rgba(77, 163, 255, 0.15);
   color: #ffffff;
   border-left-color: var(--accent);
 }
@@ -325,7 +325,7 @@ const navItems = [
 }
 .collapsed .nav-item.router-link-exact-active {
   border-left-color: transparent;
-  background: rgba(59, 91, 219, 0.25);
+  background: rgba(77, 163, 255, 0.2);
 }
 
 .nav-icon {
@@ -509,7 +509,7 @@ const navItems = [
   }
   .mobile-nav-item:hover,
   .mobile-nav-item.router-link-exact-active {
-    background: rgba(59, 91, 219, 0.15);
+    background: rgba(77, 163, 255, 0.15);
     color: #ffffff;
   }
 }
