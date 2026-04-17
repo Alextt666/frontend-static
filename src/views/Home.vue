@@ -6,12 +6,16 @@ import { RouterLink } from 'vue-router'
   <div class="page-content">
     <!-- Hero -->
     <section class="hero-section">
-      <p class="hero-greeting">👋 你好，欢迎来到我的个人空间</p>
+      <p class="hero-greeting">👋 你好，欢迎来到我的个人空间 · Welcome to my space</p>
       <h2 class="hero-headline">
-        我是一名<span class="hero-highlight">前端开发工程师</span>
+        我是一名<span class="hero-highlight">全栈 Agent 开发工程师</span>
       </h2>
+      <p class="hero-headline-en">Full-Stack Agent Developer · Building AI-powered products end to end</p>
       <p class="hero-sub">
-        专注于构建现代化的 Web 应用，热爱探索新技术，追求极致的用户体验与交互细节。
+        专注于 AI Agent 系统与全栈研发，从前端到后端、从桌面应用到大模型集成，热爱将 LLM 能力落地为真实产品。
+      </p>
+      <p class="hero-sub-en">
+        Focused on AI agent systems and full-stack development — from frontend to backend, desktop apps to LLM integration, passionate about shipping real products powered by large language models.
       </p>
     </section>
 
@@ -19,39 +23,43 @@ import { RouterLink } from 'vue-router'
     <div class="cards-grid">
       <div class="info-card" style="animation-delay: 0.15s">
         <div class="card-icon">💼</div>
-        <h3 class="card-title">关于我</h3>
-        <p class="card-desc">5+ 年前端开发经验，熟练掌握 Vue、React 等主流框架，擅长构建高性能单页应用。</p>
+        <h3 class="card-title">关于我 <span class="card-title-en">About</span></h3>
+        <p class="card-desc">全栈 Agent 开发工程师，具备前端、桌面端、后端与 AI 系统完整研发能力，深度参与 AI 视频生成平台落地。</p>
+        <p class="card-desc-en">Full-stack Agent developer with end-to-end capabilities across frontend, desktop, backend, and AI systems. Shipped AI video generation platforms in production.</p>
       </div>
       <div class="info-card" style="animation-delay: 0.23s">
         <div class="card-icon">🚀</div>
-        <h3 class="card-title">技能专长</h3>
-        <p class="card-desc">Vue 3 · React · TypeScript · Tailwind CSS · Vite · Node.js · 性能优化</p>
+        <h3 class="card-title">技术栈 <span class="card-title-en">Stack</span></h3>
+        <p class="card-desc">Vue 3 · Electron · Go · TypeScript · FFmpeg · Volcengine Ark · Klingai · Seedream</p>
+        <p class="card-desc-en">Vue 3 · Electron · Go · TypeScript · FFmpeg · LLM APIs · Agent Orchestration</p>
       </div>
       <div class="info-card" style="animation-delay: 0.31s">
         <div class="card-icon">✨</div>
-        <h3 class="card-title">当前状态</h3>
-        <p class="card-desc">开放工作机会，欢迎联系交流合作，期待有趣的项目与挑战。</p>
+        <h3 class="card-title">当前状态 <span class="card-title-en">Status</span></h3>
+        <p class="card-desc">开放工作机会，欢迎 AI 产品、Agent 系统、全栈方向的合作与交流。</p>
+        <p class="card-desc-en">Open to opportunities in AI products, agent systems, and full-stack roles. Feel free to reach out.</p>
       </div>
       <div class="info-card" style="animation-delay: 0.39s">
         <div class="card-icon">📍</div>
-        <h3 class="card-title">所在地</h3>
+        <h3 class="card-title">所在地 <span class="card-title-en">Location</span></h3>
         <p class="card-desc">中国上海 · 支持远程工作</p>
+        <p class="card-desc-en">Shanghai, China · Open to remote</p>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="cta-section">
       <RouterLink to="/resume" class="cta-btn cta-primary">
-        查看完整简历
+        查看完整简历 · View Resume
         <svg class="cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
       </RouterLink>
-      <RouterLink to="/portfolio" class="cta-btn cta-secondary">浏览作品集</RouterLink>
+      <RouterLink to="/portfolio" class="cta-btn cta-secondary">浏览作品集 · Portfolio</RouterLink>
     </div>
 
     <footer class="content-footer">
-      <p>© 2024 Alex · Frontend Developer</p>
+      <p>© 2026 Alex Zhang · Full-Stack Agent Developer</p>
     </footer>
   </div>
 </template>
@@ -80,10 +88,23 @@ import { RouterLink } from 'vue-router'
   line-height: 1.3;
 }
 .hero-highlight { color: var(--accent); }
+.hero-headline-en {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin: 0.25rem 0 1rem;
+  letter-spacing: 0.01em;
+}
 .hero-sub {
   font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.75;
+  margin: 0 0 0.4rem;
+}
+.hero-sub-en {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.7;
   margin: 0;
 }
 
@@ -115,11 +136,27 @@ import { RouterLink } from 'vue-router'
   font-weight: 700;
   color: var(--text-primary);
   margin: 0 0 0.6rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.card-title-en {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .card-desc {
   font-size: 0.82rem;
   color: var(--text-muted);
   line-height: 1.65;
+  margin: 0 0 0.35rem;
+}
+.card-desc-en {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.6;
   margin: 0;
 }
 

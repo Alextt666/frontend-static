@@ -11,14 +11,15 @@
     <div class="content-area">
       <div class="coming-soon-card">
         <div class="coming-soon-icon">📝</div>
-        <h3 class="coming-soon-title">即将上线</h3>
-        <p class="coming-soon-sub">Coming Soon</p>
+        <h3 class="coming-soon-title">即将上线 · Coming Soon</h3>
+        <p class="coming-soon-sub">Tech Notes & Thoughts</p>
         <p class="coming-soon-desc">正在筹备技术博客内容，敬请期待。</p>
+        <p class="coming-soon-desc-en">Tech blog content is on the way. Stay tuned.</p>
       </div>
     </div>
 
     <footer class="content-footer">
-      <p>© 2024 Alex · Frontend Developer</p>
+      <p>© 2026 Alex Zhang · Full-Stack Agent Developer</p>
     </footer>
   </div>
 </template>
@@ -78,6 +79,11 @@
 .coming-soon-desc {
   font-size: 0.85rem;
   color: var(--text-muted);
+  margin: 0 0 0.35rem;
+}
+.coming-soon-desc-en {
+  font-size: 0.78rem;
+  color: var(--text-dim);
   margin: 0;
 }
 

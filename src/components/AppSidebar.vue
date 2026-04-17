@@ -10,11 +10,15 @@ import {
   CollectLaptop,
   Local,
   HamburgerButton,
-  Close
+  Close,
+  Sun,
+  Moon
 } from '@icon-park/vue-next'
+import { useTheme } from '../composables/useTheme'
 
 const collapsed = ref(false)
 const isMobileMenuOpen = ref(false)
+const { isDark, toggle } = useTheme()
 
 const navItems = [
   {
@@ -99,12 +103,17 @@ const navItems = [
         </p>
         <p class="footer-coords">31.2304° N · 121.4737° E</p>
       </div>
+      <!-- 移动端主题切换 + 汉堡按钮（桌面隐藏） -->
+      <div class="mobile-actions">
+        <button class="mobile-theme-btn" @click="toggle" :title="isDark ? '切换亮色' : '切换暗色'">
+          <Sun v-if="isDark" :size="18" :stroke-width="3" />
+          <Moon v-else :size="18" :stroke-width="3" />
+        </button>
+        <button class="mobile-menu-btn" @click="isMobileMenuOpen = !isMobileMenuOpen" aria-label="菜单">
+          <component :is="isMobileMenuOpen ? Close : HamburgerButton" :size="22" :stroke-width="3" />
+        </button>
+      </div>
     </div>
-
-    <!-- 移动端汉堡按钮 -->
-    <button class="mobile-menu-btn" @click="isMobileMenuOpen = !isMobileMenuOpen" aria-label="菜单">
-      <component :is="isMobileMenuOpen ? Close : HamburgerButton" :size="22" :stroke-width="3" />
-    </button>
 
     <!-- 移动端展开菜单 -->
     <div class="mobile-nav" :class="{ open: isMobileMenuOpen }">
@@ -150,13 +159,13 @@ const navItems = [
   border-radius: 6px;
   background: transparent;
   border: none;
-  color: var(--text-sidebar);
+  color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.45;
-  transition: opacity 0.2s, background 0.2s, top 0.3s, right 0.3s;
+  opacity: 1;
+  transition: background 0.2s, color 0.2s, top 0.3s, right 0.3s;
   z-index: 10;
   flex-shrink: 0;
 }
@@ -167,8 +176,8 @@ const navItems = [
   margin: 0.5rem auto 0;
 }
 .collapse-btn:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
 }
 .collapse-btn svg {
   width: 1rem;
@@ -413,8 +422,8 @@ const navItems = [
   white-space: nowrap;
 }
 
-/* 移动端按钮（桌面隐藏） */
-.mobile-menu-btn { display: none; }
+/* 移动端按钮组（桌面隐藏） */
+.mobile-actions { display: none; }
 .mobile-nav { display: none; }
 
 /* ─── 响应式：移动端 ─────────────────────────────── */
@@ -438,29 +447,33 @@ const navItems = [
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: 0.85rem 1.25rem;
-    min-height: auto;
-    gap: 0.85rem;
+    padding: 0 1.25rem;
+    min-height: 56px;
+    gap: 0.75rem;
   }
 
   .sidebar-avatar {
-    width: 38px !important;
-    height: 38px !important;
-    margin: 0;
+    width: 36px !important;
+    height: 36px !important;
+    margin: 0 !important;
     animation: none;
     border-width: 2px;
+    flex-shrink: 0;
   }
-  .avatar-text { font-size: 1rem !important; }
+  .avatar-text { font-size: 0.95rem !important; }
 
   .sidebar-profile {
     max-height: none !important;
     opacity: 1 !important;
     flex: 1;
     text-align: left;
+    display: flex;
+    align-items: center;
   }
   .sidebar-name {
     font-size: 0.9rem;
     margin: 0;
+    line-height: 1;
     animation: none;
   }
   .sidebar-title { display: none; }
@@ -471,21 +484,28 @@ const navItems = [
     display: none;
   }
 
+  .mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .mobile-theme-btn,
   .mobile-menu-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: auto;
     background: transparent;
     border: none;
-    color: var(--text-sidebar);
+    color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
     padding: 0.4rem;
+    flex-shrink: 0;
   }
-  .mobile-menu-btn svg {
-    width: 1.4rem;
-    height: 1.4rem;
-  }
+  .mobile-theme-btn svg { width: 1.1rem; height: 1.1rem; }
+  .mobile-menu-btn svg  { width: 1.3rem; height: 1.3rem; }
 
   .mobile-nav {
     display: flex;

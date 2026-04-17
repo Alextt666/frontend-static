@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import ResumeHeader from '../components/ResumeHeader.vue'
 import ResumeAbout from '../components/ResumeAbout.vue'
 import ResumeSkills from '../components/ResumeSkills.vue'
@@ -7,56 +7,153 @@ import ResumeExperience from '../components/ResumeExperience.vue'
 import ResumeProjects from '../components/ResumeProjects.vue'
 import ResumeEducation from '../components/ResumeEducation.vue'
 
-const resumeData = ref(null)
-const loading = ref(true)
-const error = ref(null)
+const resumeData = ref({
+  header: {
+    name: '张耀天',
+    nameEn: 'Alex Zhang',
+    title: '全栈 Agent 开发工程师',
+    titleEn: 'Full-Stack Agent Developer',
+    email: 'zhangyaotian0@gmail.com',
+    phone: '18817539915',
+    location: '上海',
+    github: 'github.com/alexzhang1030',
+  },
 
-async function fetchResume() {
-  loading.value = true
-  error.value = null
-  try {
-    const res = await fetch('/api/resume')
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    resumeData.value = await res.json()
-  } catch (e) {
-    error.value = e.message
-  } finally {
-    loading.value = false
-  }
-}
+  about: {
+    zh: '全栈 Agent 开发工程师，具备从前端到后端、从桌面应用到 AI 系统的完整研发能力。熟练掌握 Vue 3、Electron、Go 等技术栈，深度参与 AI 视频生成平台与智能 Agent 任务系统的设计与落地。热衷于将大模型能力融入实际产品，追求工程质量与用户体验的极致统一。',
+    en: 'Full-stack Agent developer with end-to-end capabilities spanning frontend, backend, desktop apps, and AI systems. Proficient in Vue 3, Electron, and Go. Deeply involved in designing and shipping AI video generation platforms and intelligent agent task systems. Passionate about integrating LLM capabilities into real products with a strong focus on engineering quality and user experience.',
+  },
 
-onMounted(fetchResume)
+  skills: [
+    {
+      category: 'Frontend · 前端',
+      skills: [
+        { name: 'Vue 3 / Composition API', level: 95 },
+        { name: 'TypeScript', level: 88 },
+        { name: 'Tailwind CSS', level: 90 },
+        { name: 'Vite / Webpack', level: 85 },
+        { name: 'Pinia / Vuex', level: 88 },
+        { name: 'Element Plus', level: 85 },
+      ],
+    },
+    {
+      category: 'Desktop & Runtime · 桌面端',
+      skills: [
+        { name: 'Electron', level: 85 },
+        { name: 'Node.js', level: 82 },
+        { name: 'FFmpeg / fluent-ffmpeg', level: 75 },
+        { name: 'better-sqlite3 / TypeORM', level: 78 },
+      ],
+    },
+    {
+      category: 'Backend · 后端',
+      skills: [
+        { name: 'Go / GoFrame v2', level: 78 },
+        { name: 'MySQL / Redis', level: 75 },
+        { name: 'RESTful API Design', level: 85 },
+        { name: 'LMSTFY Task Queue', level: 72 },
+      ],
+    },
+    {
+      category: 'AI & Agent · 智能系统',
+      skills: [
+        { name: 'LLM Prompt Engineering', level: 85 },
+        { name: 'Volcengine Ark (Doubao)', level: 82 },
+        { name: 'Klingai / Seedream / Seedance', level: 78 },
+        { name: 'AI Agent Task Orchestration', level: 80 },
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      role: '全栈 Agent 开发工程师',
+      roleEn: 'Full-Stack Agent Developer',
+      company: '火山引擎 · 字节跳动',
+      companyEn: 'Volcengine · ByteDance',
+      period: '2024.03 — 至今',
+      location: '上海',
+      points: [
+        '主导 Magic-Cut（魔剪）桌面端视频编辑器核心功能研发，基于 Electron + Vue 3 + FFmpeg 构建多轨道时间线编辑系统，累计提交 592 次，覆盖 AI 识别、批量混剪、数字人替换等核心模块。',
+        'Led core feature development of Magic-Cut desktop video editor. Built multi-track timeline editing system with Electron + Vue 3 + FFmpeg. 592 commits covering AI recognition, batch mixing, and digital human replacement.',
+        '接入 Volcengine Ark（豆包大模型）实现 AI 视频亮点标记、AI 片头生成、提示词工程等功能，设计 AI 识别上报系统，支撑产品 AI 能力的数据闭环。',
+        'Integrated Volcengine Ark (Doubao LLM) for AI highlight detection, AI opening generation, and prompt engineering. Designed AI recognition reporting system to close the data loop for AI features.',
+        '参与 magic_task_backend（Go）后端研发，基于 GoFrame v2 构建 AI 图像/视频生成任务调度系统，对接 Klingai、Seedream、Seedance 等多模型 AI 驱动层，支持队列与轮询双模式异步任务处理。',
+        'Contributed to magic_task_backend (Go) — built AI image/video generation task scheduling system with GoFrame v2, integrating Klingai, Seedream, and Seedance via a pluggable AI driver abstraction with dual-mode async task processing.',
+        '负责扣费计费模块、限流方案、用户配额管理等后端基础能力建设，保障平台稳定性与商业化落地。',
+        'Built billing, rate limiting, and user quota management modules on the backend, ensuring platform stability and commercial readiness.',
+      ],
+    },
+    {
+      role: '前端开发工程师',
+      roleEn: 'Frontend Developer',
+      company: '上海某互联网公司',
+      companyEn: 'Internet Company, Shanghai',
+      period: '2022.06 — 2024.02',
+      location: '上海',
+      points: [
+        '负责多个 B 端管理系统与 C 端 Web 应用的前端研发，技术栈以 Vue 3 + TypeScript + Vite 为主。',
+        'Developed multiple B2B admin systems and C2C web apps using Vue 3 + TypeScript + Vite.',
+        '主导组件库建设与前端工程化规范制定，推动团队代码质量与研发效率提升。',
+        'Led component library development and frontend engineering standards, improving team code quality and delivery efficiency.',
+        '参与性能优化专项，通过代码分割、懒加载、SSR 等手段将核心页面 LCP 降低 40%。',
+        'Led performance optimization initiatives — reduced core page LCP by 40% via code splitting, lazy loading, and SSR.',
+      ],
+    },
+  ],
+
+  projects: [
+    {
+      name: '魔剪 Magic-Cut',
+      nameEn: 'AI-Powered Desktop Video Editor',
+      period: '2024.03 — 至今',
+      desc: '基于 Electron + Vue 3 的桌面端智能视频编辑器，面向广告素材批量生产场景。集成豆包大模型实现 AI 亮点标记、AI 片头生成、数字人替换、场景识别、语音转字幕等功能。',
+      descEn: 'Electron + Vue 3 desktop video editor for ad material batch production. Integrates Doubao LLM for AI highlight detection, AI opening generation, digital human replacement, scene recognition, and speech-to-subtitle.',
+      tech: ['Electron', 'Vue 3', 'TypeScript', 'Pinia', 'FFmpeg', 'Volcengine Ark', 'TypeORM', 'SQLite', 'Tailwind CSS'],
+      link: '',
+    },
+    {
+      name: 'Magic Task Backend',
+      nameEn: 'AI Generation Task Scheduling Service',
+      period: '2024.06 — 至今',
+      desc: '基于 Go + GoFrame v2 的 AI 内容生成任务调度后端，支持图像与视频多模型异步生成。设计可插拔 AI 驱动层，对接 Klingai、Seedream、Seedance 等主流 AI 生成模型。',
+      descEn: 'Go + GoFrame v2 backend for AI content generation task scheduling. Supports async image/video generation across multiple models via a pluggable AI driver layer integrating Klingai, Seedream, and Seedance.',
+      tech: ['Go', 'GoFrame v2', 'MySQL', 'Redis', 'LMSTFY', 'Klingai', 'Seedream', 'Seedance', 'Volcengine TOS', 'Nacos'],
+      link: '',
+    },
+    {
+      name: '个人简历网站',
+      nameEn: 'Personal Resume Website',
+      period: '2026.04',
+      desc: '基于 Vue 3 + Vite + Tailwind CSS 4 构建的静态简历网站，支持 Light/Dark 主题切换，响应式布局，PlayStation 风格设计系统。',
+      descEn: 'Static resume site built with Vue 3 + Vite + Tailwind CSS 4. Features light/dark theme toggle, responsive layout, and a PlayStation-inspired design system.',
+      tech: ['Vue 3', 'Vite', 'Tailwind CSS 4', 'JavaScript'],
+      link: 'github.com/alexzhang1030',
+    },
+  ],
+
+  education: [
+    {
+      school: '上海工程技术大学',
+      schoolEn: 'Shanghai University of Engineering Science',
+      degree: '工学学士 · 计算机科学与技术',
+      degreeEn: "Bachelor of Engineering · Computer Science & Technology",
+      period: '2018.09 — 2022.06',
+      gpa: '3.6 / 4.0',
+      honors: ['优秀毕业生', '校级奖学金', 'ACM 校队成员'],
+    },
+  ],
+})
 </script>
 
 <template>
   <div class="page-content">
     <div class="page-header">
       <h2 class="page-title">简历 / Resume</h2>
-      <p class="page-sub">Frontend Developer · 前端开发工程师</p>
+      <p class="page-sub">Full-Stack Agent Developer · 全栈 Agent 开发工程师</p>
     </div>
 
-    <div v-if="loading" class="content-area space-y-4">
-      <div v-for="n in 6" :key="n" class="resume-card animate-pulse">
-        <div class="h-3 bg-gray-200 rounded w-1/4 mb-4" />
-        <div class="h-2.5 bg-gray-100 rounded w-full mb-2" />
-        <div class="h-2.5 bg-gray-100 rounded w-4/5" />
-      </div>
-    </div>
-
-    <div v-else-if="error" class="content-area">
-      <div class="resume-card text-center py-10">
-        <p class="text-sm mb-3" style="color: var(--text-dim);">加载失败：{{ error }}</p>
-        <button
-          @click="fetchResume"
-          class="text-xs px-4 py-1.5 rounded-full border transition-colors"
-          style="color: var(--accent); border-color: var(--accent);"
-        >
-          重试
-        </button>
-      </div>
-    </div>
-
-    <div v-else-if="resumeData" class="content-area space-y-4">
+    <div class="content-area space-y-4">
       <ResumeHeader :data="resumeData.header" />
       <ResumeAbout :data="resumeData.about" />
       <ResumeSkills :data="resumeData.skills" />
@@ -66,7 +163,7 @@ onMounted(fetchResume)
     </div>
 
     <footer class="content-footer">
-      <p>© 2024 Alex · Frontend Developer</p>
+      <p>© 2026 Alex Zhang · Full-Stack Agent Developer</p>
     </footer>
   </div>
 </template>

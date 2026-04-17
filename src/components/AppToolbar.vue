@@ -49,4 +49,11 @@ const { isDark, toggle } = useTheme()
   color: var(--accent);
   transform: scale(1.05);
 }
+
+/* 移动端：隐藏独立 toolbar，改为嵌入 sidebar */
+@media (max-width: 767px) {
+  .toolbar {
+    display: none;
+  }
+}
 </style>

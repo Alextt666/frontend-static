@@ -43,7 +43,9 @@ onMounted(() => {
           <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
             <div>
               <h3 class="text-sm font-semibold" style="color: var(--text-primary);">{{ exp.role }}</h3>
-              <p class="text-xs mt-0.5" style="color: var(--accent);">{{ exp.company }}</p>
+              <p class="text-xs mt-0.5 font-mono-en" style="color: var(--text-dim);">{{ exp.roleEn }}</p>
+              <p class="text-xs mt-1" style="color: var(--accent);">{{ exp.company }}</p>
+              <p class="text-xs mt-0.5 font-mono-en" style="color: var(--text-dim);">{{ exp.companyEn }}</p>
             </div>
             <div class="shrink-0 text-right">
               <p class="text-xs" style="color: var(--text-dim);">{{ exp.period }}</p>
@@ -51,16 +53,18 @@ onMounted(() => {
             </div>
           </div>
 
-          <!-- 要点 -->
-          <ul class="space-y-1.5 mt-2">
+          <!-- 要点：每两条为一组（中文 + 英文） -->
+          <ul class="space-y-2.5 mt-2">
             <li
-              v-for="(point, i) in exp.points"
+              v-for="i in Math.floor(exp.points.length / 2)"
               :key="i"
-              class="flex items-start gap-2 text-xs"
-              style="color: var(--text-muted);"
+              class="flex items-start gap-2"
             >
-              <span class="shrink-0 mt-1 w-1 h-1 rounded-full bg-current opacity-50" />
-              <span>{{ point }}</span>
+              <span class="shrink-0 mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style="background: var(--accent); opacity: 0.6;" />
+              <div>
+                <p class="text-xs leading-relaxed" style="color: var(--text-muted);">{{ exp.points[(i - 1) * 2] }}</p>
+                <p class="text-xs leading-relaxed mt-0.5 font-mono-en" style="color: var(--text-dim);">{{ exp.points[(i - 1) * 2 + 1] }}</p>
+              </div>
             </li>
           </ul>
         </div>

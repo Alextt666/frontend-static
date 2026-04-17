@@ -48,6 +48,7 @@ const route = useRoute()
   .app-main {
     height: auto;
     overflow: visible;
+    padding-top: 56px; /* 补偿 fixed sidebar 高度 */
   }
 }
 </style>
