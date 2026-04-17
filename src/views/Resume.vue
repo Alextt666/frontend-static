@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
 import ResumeHeader from '../components/ResumeHeader.vue'
 import ResumeAbout from '../components/ResumeAbout.vue'
 import ResumeSkills from '../components/ResumeSkills.vue'
@@ -30,14 +29,13 @@ onMounted(fetchResume)
 </script>
 
 <template>
-  <div class="min-h-screen py-8 px-4" style="background: var(--bg-primary);">
-    <!-- 返回链接 -->
-    <div class="max-w-3xl mx-auto mb-5">
-      <RouterLink to="/" class="back-link">← 返回首页</RouterLink>
+  <div class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">简历 / Resume</h2>
+      <p class="page-sub">Frontend Developer · 前端开发工程师</p>
     </div>
 
-    <!-- 加载中：skeleton -->
-    <div v-if="loading" class="max-w-3xl mx-auto space-y-4">
+    <div v-if="loading" class="content-area space-y-4">
       <div v-for="n in 6" :key="n" class="resume-card animate-pulse">
         <div class="h-3 bg-gray-200 rounded w-1/4 mb-4" />
         <div class="h-2.5 bg-gray-100 rounded w-full mb-2" />
@@ -45,8 +43,7 @@ onMounted(fetchResume)
       </div>
     </div>
 
-    <!-- 加载失败 -->
-    <div v-else-if="error" class="max-w-3xl mx-auto">
+    <div v-else-if="error" class="content-area">
       <div class="resume-card text-center py-10">
         <p class="text-sm mb-3" style="color: var(--text-dim);">加载失败：{{ error }}</p>
         <button
@@ -59,8 +56,7 @@ onMounted(fetchResume)
       </div>
     </div>
 
-    <!-- 正常渲染 -->
-    <div v-else-if="resumeData" class="max-w-3xl mx-auto space-y-4">
+    <div v-else-if="resumeData" class="content-area space-y-4">
       <ResumeHeader :data="resumeData.header" />
       <ResumeAbout :data="resumeData.about" />
       <ResumeSkills :data="resumeData.skills" />
@@ -69,20 +65,58 @@ onMounted(fetchResume)
       <ResumeEducation :data="resumeData.education" />
     </div>
 
-    <p class="text-center mt-8 text-xs" style="color: var(--text-dim);">
-      © 2024 Alex · Frontend Developer
-    </p>
+    <footer class="content-footer">
+      <p>© 2024 Alex · Frontend Developer</p>
+    </footer>
   </div>
 </template>
 
 <style scoped>
-.back-link {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  text-decoration: none;
-  transition: color 0.2s;
+.page-content {
+  padding: 3rem 2.5rem;
 }
-.back-link:hover {
-  color: var(--accent);
+
+.page-header {
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-dim);
+  animation: fadeInUp 0.4s ease 0.1s both;
+}
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.4rem;
+}
+.page-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.content-area {
+  max-width: 760px;
+  margin: 0 auto;
+  animation: fadeInUp 0.4s ease 0.2s both;
+}
+
+.content-footer {
+  max-width: 760px;
+  margin: 2rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+  text-align: center;
+}
+.content-footer p {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .page-content {
+    padding: 5rem 1.25rem 2rem;
+  }
 }
 </style>

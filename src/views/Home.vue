@@ -1,323 +1,185 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
-
-const titleText = 'Frontend Developer'
-const displayedTitle = ref('')
-const showCursor = ref(false)
-const canvasRef = ref(null)
-let animFrameId = null
-
-function initStars(canvas) {
-  const ctx = canvas.getContext('2d')
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
-
-  const stars = Array.from({ length: 150 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.2 + 0.2,
-    speed: Math.random() * 0.15 + 0.05,
-    opacity: Math.random() * 0.6 + 0.2,
-  }))
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    stars.forEach(s => {
-      ctx.beginPath()
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(200, 220, 255, ${s.opacity})`
-      ctx.fill()
-      s.y += s.speed
-      if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width }
-    })
-    animFrameId = requestAnimationFrame(draw)
-  }
-  draw()
-
-  const onResize = () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-  }
-  window.addEventListener('resize', onResize)
-  return onResize
-}
-
-onMounted(() => {
-  document.body.style.background = '#050508'
-
-  let resizeHandler = null
-  if (canvasRef.value) {
-    resizeHandler = initStars(canvasRef.value)
-  }
-
-  // 打字机效果，延迟 1400ms 启动
-  setTimeout(() => {
-    showCursor.value = true
-    let i = 0
-    const interval = setInterval(() => {
-      if (i < titleText.length) {
-        displayedTitle.value += titleText[i++]
-      } else {
-        clearInterval(interval)
-      }
-    }, 60)
-  }, 1400)
-
-  onUnmounted(() => {
-    if (animFrameId) cancelAnimationFrame(animFrameId)
-    if (resizeHandler) window.removeEventListener('resize', resizeHandler)
-    document.body.style.background = ''
-  })
-})
-
-onUnmounted(() => {
-  if (animFrameId) cancelAnimationFrame(animFrameId)
-  document.body.style.background = ''
-})
 </script>
 
 <template>
-  <div class="home-root">
-    <!-- 星空 canvas -->
-    <canvas ref="canvasRef" class="starfield" />
-
-    <!-- 单次扫描线 -->
-    <div class="scan-line" />
-
-    <!-- 四角装饰 -->
-    <div class="corner corner-tl" />
-    <div class="corner corner-tr" />
-    <div class="corner corner-bl" />
-    <div class="corner corner-br" />
-
-    <!-- 中央内容 -->
-    <main class="content">
-      <p class="sys-label">SYSTEM ONLINE // v2.1</p>
-
-      <h1 class="name">耀天 / ALEX</h1>
-
-      <p class="title-line">
-        <span>{{ displayedTitle }}</span>
-        <span v-if="showCursor" class="cursor">█</span>
+  <div class="page-content">
+    <!-- Hero -->
+    <section class="hero-section">
+      <p class="hero-greeting">👋 你好，欢迎来到我的个人空间</p>
+      <h2 class="hero-headline">
+        我是一名<span class="hero-highlight">前端开发工程师</span>
+      </h2>
+      <p class="hero-sub">
+        专注于构建现代化的 Web 应用，热爱探索新技术，追求极致的用户体验与交互细节。
       </p>
+    </section>
 
-      <div class="divider" />
+    <!-- 信息卡片 -->
+    <div class="cards-grid">
+      <div class="info-card" style="animation-delay: 0.15s">
+        <div class="card-icon">💼</div>
+        <h3 class="card-title">关于我</h3>
+        <p class="card-desc">5+ 年前端开发经验，熟练掌握 Vue、React 等主流框架，擅长构建高性能单页应用。</p>
+      </div>
+      <div class="info-card" style="animation-delay: 0.23s">
+        <div class="card-icon">🚀</div>
+        <h3 class="card-title">技能专长</h3>
+        <p class="card-desc">Vue 3 · React · TypeScript · Tailwind CSS · Vite · Node.js · 性能优化</p>
+      </div>
+      <div class="info-card" style="animation-delay: 0.31s">
+        <div class="card-icon">✨</div>
+        <h3 class="card-title">当前状态</h3>
+        <p class="card-desc">开放工作机会，欢迎联系交流合作，期待有趣的项目与挑战。</p>
+      </div>
+      <div class="info-card" style="animation-delay: 0.39s">
+        <div class="card-icon">📍</div>
+        <h3 class="card-title">所在地</h3>
+        <p class="card-desc">中国上海 · 支持远程工作</p>
+      </div>
+    </div>
 
-      <nav class="nav-links">
-        <RouterLink to="/resume" class="nav-item">
-          <span class="nav-index">01</span>
-          <span class="nav-label">简历 / RESUME</span>
-          <span class="nav-arrow">→</span>
-        </RouterLink>
-        <RouterLink to="/portfolio" class="nav-item">
-          <span class="nav-index">02</span>
-          <span class="nav-label">作品集 / PORTFOLIO</span>
-          <span class="nav-arrow">→</span>
-        </RouterLink>
-        <RouterLink to="/diary" class="nav-item">
-          <span class="nav-index">03</span>
-          <span class="nav-label">日记 / DIARY</span>
-          <span class="nav-arrow">→</span>
-        </RouterLink>
-      </nav>
-    </main>
+    <!-- CTA -->
+    <div class="cta-section">
+      <RouterLink to="/resume" class="cta-btn cta-primary">
+        查看完整简历
+        <svg class="cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </RouterLink>
+      <RouterLink to="/portfolio" class="cta-btn cta-secondary">浏览作品集</RouterLink>
+    </div>
 
-    <!-- 坐标 -->
-    <p class="coords">31.2304° N &nbsp; 121.4737° E &nbsp;// &nbsp;SHANGHAI</p>
+    <footer class="content-footer">
+      <p>© 2024 Alex · Frontend Developer</p>
+    </footer>
   </div>
 </template>
 
 <style scoped>
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+.page-content {
+  padding: 3rem 2.5rem;
 }
 
-.home-root {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: #050508;
-  overflow: hidden;
+/* Hero */
+.hero-section {
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  animation: fadeInUp 0.5s ease 0.05s both;
+}
+.hero-greeting {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+.hero-headline {
+  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+  line-height: 1.3;
+}
+.hero-highlight { color: var(--accent); }
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* 卡片网格 */
+.cards-grid {
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 1.6rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  animation: fadeInUp 0.4s ease both;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.card-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.6rem;
+}
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* CTA */
+.cta-section {
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.starfield {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 单次扫描线 */
-@keyframes scanSweepOnce {
-  0%   { top: -2px; opacity: 0.8; }
-  100% { top: 100vh; opacity: 0; }
-}
-.scan-line {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #00f5ff 40%, #00f5ff 60%, transparent 100%);
-  box-shadow: 0 0 12px #00f5ff, 0 0 24px #00f5ff60;
-  animation: scanSweepOnce 2s ease-in 0.3s forwards;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* 四角装饰 */
-.corner {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  pointer-events: none;
-  z-index: 2;
-}
-.corner-tl { top: 24px; left: 24px; border-top: 1px solid rgba(0,245,255,0.5); border-left: 1px solid rgba(0,245,255,0.5); }
-.corner-tr { top: 24px; right: 24px; border-top: 1px solid rgba(0,245,255,0.5); border-right: 1px solid rgba(0,245,255,0.5); }
-.corner-bl { bottom: 24px; left: 24px; border-bottom: 1px solid rgba(0,245,255,0.5); border-left: 1px solid rgba(0,245,255,0.5); }
-.corner-br { bottom: 24px; right: 24px; border-bottom: 1px solid rgba(0,245,255,0.5); border-right: 1px solid rgba(0,245,255,0.5); }
-
-/* 中央内容 */
-.content {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0;
-}
-
-/* 系统标签 */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-.sys-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  color: rgba(0, 245, 255, 0.45);
-  margin-bottom: 2rem;
-  animation: fadeIn 0.6s ease 0.5s both;
-}
-
-/* 名字 */
-@keyframes glitchIn {
-  0%   { opacity: 0; transform: translateX(-10px); filter: blur(6px); }
-  60%  { opacity: 1; transform: translateX(2px);   filter: blur(0); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-.name {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: clamp(2rem, 6vw, 4.5rem);
-  color: #e8f4ff;
-  letter-spacing: 0.05em;
-  margin: 0 0 1.2rem;
-  text-shadow: 0 0 40px rgba(0, 245, 255, 0.15);
-  animation: glitchIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
-}
-
-/* 职位打字机 */
-.title-line {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-  color: #00f5ff;
-  letter-spacing: 0.12em;
-  margin: 0 0 2.5rem;
-  min-height: 1.6em;
-  text-shadow: 0 0 12px rgba(0, 245, 255, 0.5);
-  animation: fadeIn 0.1s ease 1.3s both;
-}
-
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-.cursor {
-  animation: cursorBlink 0.7s steps(1) infinite;
-  color: #00f5ff;
-}
-
-/* 分割线 */
-@keyframes expandWidth {
-  from { width: 0; opacity: 0; }
-  to   { width: 120px; opacity: 1; }
-}
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #00f5ff, transparent);
-  box-shadow: 0 0 8px rgba(0, 245, 255, 0.4);
-  margin-bottom: 2.5rem;
-  animation: expandWidth 0.6s ease 1.8s both;
-}
-
-/* 导航列表 */
-@keyframes navFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.nav-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  width: clamp(260px, 40vw, 360px);
-  animation: navFadeIn 0.6s ease 1.8s both;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
   gap: 1rem;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+  flex-wrap: wrap;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
   text-decoration: none;
-  color: rgba(232, 244, 255, 0.6);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  transition: color 0.2s, background 0.2s, padding-left 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
-.nav-item:first-child { border-top: 1px solid rgba(0, 245, 255, 0.1); }
-.nav-item:hover {
-  color: #00f5ff;
-  background: rgba(0, 245, 255, 0.04);
-  padding-left: 1.4rem;
+.cta-btn:hover { transform: translateY(-2px); }
+.cta-primary {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(59, 91, 219, 0.28);
+}
+.cta-primary:hover { box-shadow: 0 6px 20px rgba(59, 91, 219, 0.38); }
+.cta-secondary {
+  background: var(--bg-card);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.cta-secondary:hover { background: var(--accent-light); }
+.cta-arrow {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s;
+}
+.cta-btn:hover .cta-arrow { transform: translateX(3px); }
+
+/* 页脚 */
+.content-footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+  text-align: center;
+}
+.content-footer p {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin: 0;
 }
 
-.nav-index {
-  color: rgba(0, 245, 255, 0.35);
-  font-size: 0.65rem;
-  flex-shrink: 0;
-}
-.nav-label { flex: 1; }
-.nav-arrow {
-  color: rgba(0, 245, 255, 0.3);
-  transition: color 0.2s, transform 0.2s;
-}
-.nav-item:hover .nav-arrow {
-  color: #00f5ff;
-  transform: translateX(4px);
-}
-
-/* 坐标 */
-.coords {
-  position: absolute;
-  bottom: 28px;
-  right: 32px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  color: rgba(0, 245, 255, 0.18);
-  pointer-events: none;
-  z-index: 2;
-  animation: fadeIn 1s ease 2.2s both;
+@media (max-width: 767px) {
+  .page-content { padding: 5rem 1.25rem 2rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .cta-section { flex-direction: column; }
+  .cta-btn { width: 100%; justify-content: center; }
 }
 </style>

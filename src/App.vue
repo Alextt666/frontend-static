@@ -1,18 +1,51 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+import AppSidebar from './components/AppSidebar.vue'
+
+const route = useRoute()
 </script>
 
 <template>
-  <RouterView v-slot="{ Component }">
-    <Transition name="page" mode="out-in">
-      <component :is="Component" />
-    </Transition>
-  </RouterView>
+  <div class="app-root">
+    <AppSidebar />
+    <main class="app-main">
+      <RouterView v-slot="{ Component }">
+        <Transition name="fade" mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </Transition>
+      </RouterView>
+    </main>
+  </div>
 </template>
 
 <style>
-.page-enter-active,
-.page-leave-active { transition: opacity 0.4s ease; }
-.page-enter-from,
-.page-leave-to    { opacity: 0; }
+.app-root {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-main {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg-primary);
+}
+
+.fade-enter-active,
+.fade-leave-active { transition: opacity 0.2s ease; }
+.fade-enter-from,
+.fade-leave-to    { opacity: 0; }
+
+@media (max-width: 767px) {
+  .app-root {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+  .app-main {
+    height: auto;
+    overflow: visible;
+  }
+}
 </style>

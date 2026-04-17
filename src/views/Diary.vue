@@ -1,85 +1,100 @@
 <script setup>
-import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div class="page-root">
-    <div class="corner corner-tl" />
-    <div class="corner corner-tr" />
-    <div class="corner corner-bl" />
-    <div class="corner corner-br" />
+  <div class="page-content">
+    <div class="page-header">
+      <h2 class="page-title">日记 / Diary</h2>
+      <p class="page-sub">技术笔记与思考 · Tech Notes & Thoughts</p>
+    </div>
 
-    <main class="content">
-      <p class="sys-label">MODULE :: DIARY</p>
-      <h1 class="title">日记</h1>
-      <p class="subtitle">// COMING SOON</p>
-      <RouterLink to="/" class="back-link">← BACK_TO_HOME</RouterLink>
-    </main>
+    <div class="content-area">
+      <div class="coming-soon-card">
+        <div class="coming-soon-icon">📝</div>
+        <h3 class="coming-soon-title">即将上线</h3>
+        <p class="coming-soon-sub">Coming Soon</p>
+        <p class="coming-soon-desc">正在筹备技术博客内容，敬请期待。</p>
+      </div>
+    </div>
+
+    <footer class="content-footer">
+      <p>© 2024 Alex · Frontend Developer</p>
+    </footer>
   </div>
 </template>
 
 <style scoped>
-.page-root {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: #050508;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.page-content {
+  padding: 3rem 2.5rem;
 }
 
-.corner {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  pointer-events: none;
+.page-header {
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-dim);
+  animation: fadeInUp 0.4s ease 0.1s both;
 }
-.corner-tl { top: 24px; left: 24px; border-top: 1px solid rgba(0,245,255,0.5); border-left: 1px solid rgba(0,245,255,0.5); }
-.corner-tr { top: 24px; right: 24px; border-top: 1px solid rgba(0,245,255,0.5); border-right: 1px solid rgba(0,245,255,0.5); }
-.corner-bl { bottom: 24px; left: 24px; border-bottom: 1px solid rgba(0,245,255,0.5); border-left: 1px solid rgba(0,245,255,0.5); }
-.corner-br { bottom: 24px; right: 24px; border-bottom: 1px solid rgba(0,245,255,0.5); border-right: 1px solid rgba(0,245,255,0.5); }
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.4rem;
+}
+.page-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.content-area {
+  max-width: 760px;
+  margin: 0 auto;
+  animation: fadeInUp 0.4s ease 0.2s both;
+}
+
+.coming-soon-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 4rem 2rem;
   text-align: center;
-  gap: 0;
+  box-shadow: var(--shadow-sm);
 }
-
-.sys-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  color: rgba(0, 245, 255, 0.45);
-  margin-bottom: 1.5rem;
+.coming-soon-icon { font-size: 3rem; margin-bottom: 1.25rem; }
+.coming-soon-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.4rem;
 }
-
-.title {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: clamp(2rem, 6vw, 4rem);
-  color: #e8f4ff;
+.coming-soon-sub {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   margin: 0 0 1rem;
 }
-
-.subtitle {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 1rem;
-  color: rgba(0, 245, 255, 0.5);
-  letter-spacing: 0.2em;
-  margin: 0 0 3rem;
+.coming-soon-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
 }
 
-.back-link {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  color: rgba(0, 245, 255, 0.4);
-  text-decoration: none;
-  transition: color 0.2s;
+.content-footer {
+  max-width: 760px;
+  margin: 2rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+  text-align: center;
 }
-.back-link:hover { color: #00f5ff; }
+.content-footer p {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .page-content { padding: 5rem 1.25rem 2rem; }
+}
 </style>

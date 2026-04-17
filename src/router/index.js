@@ -7,9 +7,9 @@ import Diary from '../views/Diary.vue'
 export default createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: Home },
-    { path: '/resume', component: Resume },
+    { path: '/',          component: Home },
+    { path: '/resume',    component: Resume },
     { path: '/portfolio', component: Portfolio },
-    { path: '/diary', component: Diary },
+    { path: '/diary',     component: Diary },
   ],
 })
