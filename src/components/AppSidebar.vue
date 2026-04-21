@@ -60,7 +60,7 @@ const navItems = [
       <!-- 头像 -->
       <RouterLink to="/" class="sidebar-avatar-link">
         <div class="sidebar-avatar">
-          <span class="avatar-text">耀</span>
+          <img src="/avatar.jpg" alt="头像" class="avatar-img" />
         </div>
       </RouterLink>
 
@@ -216,11 +216,12 @@ const navItems = [
   box-shadow: 0 0 0 5px rgba(77, 163, 255, 0.25);
   transform: scale(1.02);
 }
-.avatar-text {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--accent);
-  transition: font-size 0.3s;
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.2s;
 }
 
 /* 折叠时头像缩小 */
@@ -229,9 +230,6 @@ const navItems = [
   height: 40px;
   margin-bottom: 0.75rem;
   border-width: 2px;
-}
-.collapsed .avatar-text {
-  font-size: 1.1rem;
 }
 
 /* 姓名 + 职位 */
@@ -460,7 +458,6 @@ const navItems = [
     border-width: 2px;
     flex-shrink: 0;
   }
-  .avatar-text { font-size: 0.95rem !important; }
 
   .sidebar-profile {
     max-height: none !important;

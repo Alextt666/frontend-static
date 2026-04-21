@@ -9,7 +9,7 @@ const info = props.data
 
       <!-- 头像 -->
       <div class="avatar-circle shrink-0">
-        <span class="avatar-text">{{ info.name.charAt(0) }}</span>
+        <img src="/avatar.jpg" alt="头像" class="avatar-img" />
       </div>
 
       <!-- 名字 + 职位 -->
@@ -76,10 +76,11 @@ const info = props.data
   flex-shrink: 0;
 }
 
-.avatar-text {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--accent);
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .contact-item {
